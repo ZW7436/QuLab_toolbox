@@ -233,3 +233,29 @@ class Spinecho_Fit(BaseFit):
     def T2E_error(self):
         A_e,B_e,T2E_e=self._error
         return T2E_e
+
+class Beatfreq_Fit(BaseFit):
+    '''Fit Beatfreq'''
+    def _fitfunc(self,t,A,B,T2):
+        y=np.exp(-t/T2)*[np.cos(2*np.pi*A*t)+np.cos(2*np.pi*(A+B)*t)]
+        return y
+
+    @property
+    def T2(self):
+        A,B,T2 = self._popt
+        return T2
+
+    @property
+    def T2_error(self):
+        A_e,B_e,T2_e=self._error
+        return T2_e
+
+    @property
+    def A(self):
+        A,B,T2=self._popt
+        return A
+
+    @property
+    def B(self):
+        A,B,T2=self._popt
+        return B

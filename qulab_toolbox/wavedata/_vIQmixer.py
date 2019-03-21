@@ -64,8 +64,8 @@ class vIQmixer(object):
     def UpConversion(self):
         '''需要先 set_IQ, set_LO, set_Cali, 再使用此方法'''
         cali_phi_i, cali_phi_q = self._cali_phi
-        rf_wd = self.__I * Sin(2*np.pi*self.LO_freq,cali_phi_i,self.len,self.sRate) + \
-                self.__Q * Cos(2*np.pi*self.LO_freq,cali_phi_q,self.len,self.sRate)
+        rf_wd = self.__I * Sin(2*np.pi*self.LO_freq,cali_phi_i,self.len,self.sRate) /np.sqrt(2)+ \
+                self.__Q * Cos(2*np.pi*self.LO_freq,cali_phi_q,self.len,self.sRate)/np.sqrt(2)
         self._RF = rf_wd
         return self
 
